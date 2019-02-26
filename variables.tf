@@ -83,5 +83,5 @@ variable "nat_gateway_enabled" {
 
 variable "ignore_changes" {
   description = "Flag to ignore changes"
-  defaullt    = "tags"
+  default     = "tags"
 }
