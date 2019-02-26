@@ -12,8 +12,7 @@ module "public_subnet_label" {
   source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
-  name       = "${var.name}"
-  attributes = ["public"]
+  name       = "public"
   tags       = "${var.tags}"
 }
 
@@ -43,13 +42,6 @@ resource "aws_route_table" "public" {
   lifecycle {
     ignore_changes = ["tags"]
   }
-}
-
-resource "aws_route" "public" {
-  count                  = "${signum(length(var.vpc_default_route_table_id)) == 1 ? 0 : 1}"
-  route_table_id         = "${join("", aws_route_table.public.*.id)}"
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = "${var.igw_id}"
 }
 
 resource "aws_route_table_association" "public" {

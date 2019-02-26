@@ -2,7 +2,7 @@ module "private_label" {
   source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
-  name       = "${var.name}"
+  name       = "private"
   delimiter  = "${var.delimiter}"
   attributes = ["private"]
   tags       = "${var.tags}"
@@ -13,7 +13,6 @@ module "private_subnet_label" {
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   name       = "${var.name}"
-  attributes = ["private"]
   tags       = "${var.tags}"
 }
 
