@@ -29,6 +29,7 @@ resource "aws_nat_gateway" "default" {
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes = ["${var.ignore_changes}"]
   }
 }
 

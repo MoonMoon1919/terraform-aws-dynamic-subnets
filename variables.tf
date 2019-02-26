@@ -80,3 +80,8 @@ variable "nat_gateway_enabled" {
   description = "Flag to enable/disable NAT gateways for private subnets"
   default     = "true"
 }
+
+variable "ignore_changes" {
+  description = "Flag to ignore changes"
+  defaullt    = "tags"
+}

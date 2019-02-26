@@ -28,6 +28,10 @@ resource "aws_subnet" "public" {
   cidr_block        = "${cidrsubnet(signum(length(var.cidr_block)) == 1 ? var.cidr_block : data.aws_vpc.default.cidr_block, ceil(log(local.public_subnet_count * 2, 2)), local.public_subnet_count + count.index)}"
 
   tags = "${merge(module.public_subnet_label.tags, map("Name",format("%s%s%s", module.public_subnet_label.id, var.delimiter, replace(element(var.availability_zones, count.index),"-",var.delimiter))))}"
+
+  lifecycle {
+    ignores_changes = ["${var.ignores_changes}"]
+  }
 }
 
 resource "aws_route_table" "public" {
@@ -35,6 +39,10 @@ resource "aws_route_table" "public" {
   vpc_id = "${data.aws_vpc.default.id}"
 
   tags = "${module.public_label.tags}"
+
+  lifecycle {
+    ignores_changes = ["${var.ignores_changes}"]
+  }
 }
 
 resource "aws_route" "public" {
@@ -80,4 +88,8 @@ resource "aws_network_acl" "public" {
   }
 
   tags = "${module.public_label.tags}"
+
+  lifecycle {
+    ignores_changes = ["${var.ignores_changes}"]
+  }
 }
