@@ -30,7 +30,7 @@ resource "aws_subnet" "public" {
   tags = "${merge(module.public_subnet_label.tags, map("Name",format("%s%s%s", module.public_subnet_label.id, var.delimiter, replace(element(var.availability_zones, count.index),"-",var.delimiter))))}"
 
   lifecycle {
-    ignore_changes = ["${var.ignore_changes}"]
+    ignore_changes = ["tags"]
   }
 }
 
@@ -41,7 +41,7 @@ resource "aws_route_table" "public" {
   tags = "${module.public_label.tags}"
 
   lifecycle {
-    ignore_changes = ["${var.ignore_changes}"]
+    ignore_changes = ["tags"]
   }
 }
 
@@ -90,6 +90,6 @@ resource "aws_network_acl" "public" {
   tags = "${module.public_label.tags}"
 
   lifecycle {
-    ignore_changes = ["${var.ignore_changes}"]
+    ignore_changes = ["tags"]
   }
 }
